@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/img/logo.svg";
 import "./style.css";
-
+//reposanvél por conectar o redux com os reducers
+import { useSelector } from "react-redux";
 export default function Header() {
+  const reserveSize = useSelector((state) => state.reducerReserver.length);
   return (
     <header className="container">
       <Link to="/">
@@ -12,7 +14,7 @@ export default function Header() {
       <Link className="reserva" to="/reservas">
         <div>
           <strong>Minhas reservas</strong>
-          <span>0 reservas</span>
+          <span>{reserveSize}</span>
         </div>
       </Link>
     </header>
