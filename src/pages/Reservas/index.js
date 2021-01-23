@@ -1,16 +1,14 @@
 import React from "react";
 import { MdDelete } from "react-icons/md";
 import "./style.css";
+import { removeReserve } from "../../store/modules/reserve/actions";
 //reposanvél por conectar o redux com os reducers
 import { useSelector, useDispatch } from "react-redux";
 export default function Reservas() {
   const dispatch = useDispatch();
   const reserves = useSelector((state) => state.reducerReserver);
   const handleRemove = (id) => {
-    dispatch({
-      type: "REMOVE_RESERVE",
-      id,
-    });
+    dispatch(removeReserve(id));
   };
   return (
     <div>

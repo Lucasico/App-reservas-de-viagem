@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import api from "../../services/http";
 import { MdFlightTakeoff } from "react-icons/md";
 import "./style.css";
+import { addReserve } from "../../store/modules/reserve/actions";
 
 export default function Home() {
   //usado para disparar um action
@@ -19,10 +20,7 @@ export default function Home() {
   }
   const handleAdd = (trip) => {
     //disparando a action, com tipo obrigatorio
-    dispatch({
-      type: "ADD_RESERVE",
-      trip,
-    });
+    dispatch(addReserve(trip));
   };
   return (
     <div>
