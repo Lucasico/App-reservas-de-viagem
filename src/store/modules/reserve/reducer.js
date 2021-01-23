@@ -33,7 +33,19 @@ export default function reducerReserver(state = [], action) {
           copyState.splice(tripIndex, 1);
         }
       });
-
+    case "UPDATE_RESERVE":
+      if (action.amount <= 0) {
+        return state;
+      } else {
+        return produce(state, (copyState) => {
+          const tripIndex = copyState.findIndex(
+            (copy) => copy.id === action.id
+          );
+          if (tripIndex >= 0) {
+            copyState[tripIndex].amount = Number(action.amount);
+          }
+        });
+      }
     default:
       return state;
   }
