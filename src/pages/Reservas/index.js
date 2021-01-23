@@ -2,10 +2,16 @@ import React from "react";
 import { MdDelete } from "react-icons/md";
 import "./style.css";
 //reposanvél por conectar o redux com os reducers
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 export default function Reservas() {
+  const dispatch = useDispatch();
   const reserves = useSelector((state) => state.reducerReserver);
-
+  const handleRemove = (id) => {
+    dispatch({
+      type: "REMOVE_RESERVE",
+      id,
+    });
+  };
   return (
     <div>
       <h1 className="title">Voce solicitou {reserves.length} reserva</h1>
@@ -14,7 +20,7 @@ export default function Reservas() {
           <img src={reserve.image} alt={reserve.title} />
           <strong>{reserve.title}</strong>
           <span>Quantidade: {reserve.amount}</span>
-          <button type="button" onClick={() => {}}>
+          <button type="button" onClick={() => handleRemove(reserve.id)}>
             <MdDelete size={20} color="black" />
           </button>
         </div>

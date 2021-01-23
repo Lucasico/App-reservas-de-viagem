@@ -26,6 +26,14 @@ export default function reducerReserver(state = [], action) {
           });
         }
       });
+    case "REMOVE_RESERVE":
+      return produce(state, (copyState) => {
+        const tripIndex = copyState.findIndex((copy) => copy.id === action.id);
+        if (tripIndex >= 0) {
+          copyState.splice(tripIndex, 1);
+        }
+      });
+
     default:
       return state;
   }
