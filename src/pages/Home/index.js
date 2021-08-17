@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import api from "../../services/http";
+import { useDispatch } from "react-redux";
+import { addReserve } from "../../store/modules/reserve/actions";
 import { MdFlightTakeoff } from "react-icons/md";
 import "./style.css";
-import { addReserve } from "../../store/modules/reserve/actions";
 
 export default function Home() {
   //usado para disparar um action
@@ -18,17 +18,19 @@ export default function Home() {
     const response = await api.get("trips");
     setTrips(response.data);
   }
+  
   const handleAdd = (trip) => {
     //disparando a action, com tipo obrigatorio
     dispatch(addReserve(trip));
   };
+
   return (
     <div>
       <div className="box">
         {trips.map((trip) => (
           <li key={trip.id}>
             <img src={trip.image} alt={trip.title} />
-            <strong>{trip.title}</strong>
+            <strong data-testid="title">{trip.title}</strong>
             <span>Status: {trip.status ? "Disponivel" : "Indisponivel"}</span>
             <button type="button" onClick={() => handleAdd(trip)}>
               <div>
